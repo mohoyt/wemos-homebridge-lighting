@@ -1,0 +1,35 @@
+{
+   "bridge": {
+      "name": "Homebridge",
+      "username": "CC:22:3D:E3:CE:30",
+      "port": 51826,
+      "pin": "282-82-828"
+   },
+
+   "description": "Example configuration file for Wemos and Fast LED Strip",
+
+   "accessories": [{
+      "accessory": "HTTP-RGB",
+      "name": "Light Strip",
+
+      "switch": {
+         "status": "http://192.168.0.110:80/status",
+         "powerOn": "http://192.168.0.110:80/on",
+         "powerOff": "http://192.168.0.110:80/off"
+      },
+
+      "color": {
+         "status": "http://192.168.0.110:80/color",
+         "url": "http://192.168.0.110:80/set/%s"
+      },
+
+      "brightness": {
+         "status": "http://192.168.0.110:80/bright",
+         "url": "http://192.168.0.110:80/set/%s"
+      }
+
+   }],
+
+   "platforms": []
+
+}
