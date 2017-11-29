@@ -6,7 +6,7 @@
       "pin": "282-82-828"
    },
 
-   "description": "Example configuration file for Wemos and Fast LED Strip",
+   "description": "Configuration file for Wemos and Fast LED Strip",
 
    "accessories": [{
       "accessory": "HTTP-RGB",
@@ -24,8 +24,8 @@
       },
 
       "brightness": {
-         "status": "http://192.168.0.110:80/bright",
-         "url": "http://192.168.0.110:80/set/%s"
+         "status": "http://192.168.0.110:80/brightness",
+         "url": "http://192.168.0.110:80/brightness/%s"
       }
 
    }],

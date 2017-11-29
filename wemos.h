@@ -15,9 +15,9 @@ CRGB leds[NUM_LEDS];
 
 WiFiServer server(80); //Set server port
 
-String hexString = "080100";
-unsigned long hexHex = 0x080100; //Define initial color here (hex value), 080100 would be a calm warmtone i.e.
+String hexString = "080100"; //Define initial color here (hex value), 080100 would be a calm warmtone i.e.
 String readString; //String to hold incoming request
+int stripBrightness = 10;
 
 int state;
 
@@ -74,6 +74,7 @@ void allOff() {
       for( int i = 0; i < NUM_LEDS; i++) {
         leds[i] = CRGB::Black;
       }
+    FastLED.setBrightness(10);
     FastLED.show();
     //FastLED.delay(1000/FRAMES_PER_SECOND);
 }
@@ -85,6 +86,7 @@ void setHex() {
          leds[i] = strtoul(&hexString[0],NULL,16);
         //leds[i] = CRGB::HotPink;
       }
+    FastLED.setBrightness(stripBrightness);
     FastLED.show();
 }
 
@@ -155,6 +157,14 @@ void loop() {
                     if (readString.indexOf("set") > 0) {
                         hexString = "";
                         hexString = readString.substring(9, 15);
+                        setHex();
+                        //showValues();
+                    }
+
+                    //Set color
+                    if (readString.indexOf("brightness") > 0) {
+                        stripBrightness = 10;
+                        stripBrightness = readString.substring(9, 15);
                         //hexHex = strtoul(hexString,NULL,16);
                         setHex();
                         //showValues();
@@ -171,8 +181,8 @@ void loop() {
                     }
 
                     //Status brightness (%)
-                    if(readString.indexOf("bright") >0) {
-                    client.println(BRIGHTNESS);
+                    if(readString.indexOf("brightness") >0) {
+                    client.println(stripBrightness);
                     }
 
 
